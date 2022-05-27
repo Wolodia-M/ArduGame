@@ -6,11 +6,9 @@ void setup()
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
-  tft.init();
-  tft.setRotation(1);
   start();
   tn.noTone();
-  sapi.moveTrack(0, 29);
+  sapi.moveTrack(0, 32, 0);
 }
 
 void loop()

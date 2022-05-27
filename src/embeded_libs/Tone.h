@@ -14,9 +14,19 @@
 #pragma once
 #include <Arduino.h>
 
+/**
+ * @brief tone() for ESP32
+ * 
+ */
 class toneAPI
 {
 public:
+  /**
+   * @brief Construct a new toneAPI object
+   * 
+   * @param pin pin for pyezospeaker
+   * @param channel internal timer channel
+   */
   toneAPI(uint8_t pin = -1, uint8_t channel = -1)
   {
     _pin = pin;
@@ -25,21 +35,44 @@ public:
     _dur = 0;
     ledcAttachPin(_pin, _chan);
   }
+  /**
+   * @brief attach pyezo or change settings
+   * 
+   * @param pin pin for pyezospeaker
+   * @param channel internal timer channel
+   */
   void attach(uint8_t pin = -1, uint8_t channel = -1){
     _pin = pin;
     _chan = channel;
     ledcAttachPin(_pin, _chan);
   }
+  /**
+   * @brief tone() function
+   * 
+   * @param freq frequency for tone
+   */
   void tone(double freq)
   {
     ledcWriteTone(_chan, freq);
     _play = 1;
   }
+  /**
+   * @brief tone() with note_t
+   * 
+   * @param note note
+   * @param octave octave
+   */
   void tone(note_t note, uint8_t octave)
   {
     ledcWriteNote(_chan, note, octave);
     _play = 2;
   }
+  /**
+   * @brief tone() with delay
+   * 
+   * @param freq frequency for tone
+   * @param dur duration of playing
+   */
   void tone(double freq, unsigned long dur)
   {
     ledcWriteTone(_chan, freq);
@@ -47,6 +80,13 @@ public:
     _dur = dur;
     _cur = millis();
   }
+  /**
+   * @brief tone() with note and delay
+   * 
+   * @param note note
+   * @param octave octave
+   * @param dur duration of playing
+   */
   void tone(note_t note, uint8_t octave, unsigned long dur)
   {
     ledcWriteNote(_chan, note, octave);
@@ -54,6 +94,10 @@ public:
     _dur = dur;
     _cur = millis();
   }
+  /**
+   * @brief tone main tick
+   * 
+   */
   void tick()
   {
     if (_play > 2 && millis() - _cur > _dur)
@@ -61,6 +105,10 @@ public:
       toneAPI::noTone();
     }
   }
+  /**
+   * @brief noTone() function
+   * 
+   */
   void noTone()
   {
     ledcWriteTone(_chan, 0);

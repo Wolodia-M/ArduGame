@@ -19,9 +19,10 @@
     #define SD_SCK 25
     #define SD_CS 33
 */
-#define PYEZO 13 // pin for pyezospeaker
+#define PYEZO 12 // pin for pyezospeaker
+// DEBUG / NODEBUG
+// MUS_POINTER_DEBUG
 #define DEBUG
-uint8_t arr[] = {1, 5, 6, 100, 200, 20};
 // Objects
 TFT_eSPI tft = TFT_eSPI();              // display
 toneAPI tn((uint8_t)PYEZO, (uint8_t)0); // pyezospeaker
