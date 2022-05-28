@@ -21,22 +21,22 @@
 */
 #define PYEZO 12 // pin for pyezospeaker
 // DEBUG / NODEBUG
-// MUS_POINTER_DEBUG, MUS_DEBUG
+// MUS_POINTER_DEBUG, MUS_DEBUG, BUTTONS_DEBUG
 #define DEBUG
-#define MUS_DEBUG
+#define BUTTONS_DEBUG
+// Buttons
+ btnapi start_b(13);
+ btnapi select_b(15);
 // Objects
 TFT_eSPI tft = TFT_eSPI();              // display
 toneAPI tn((uint8_t)PYEZO, (uint8_t)0); // pyezospeaker
 #include "embeded_libs/soundAPI.h"  //api for sounds
 soundAPI sapi;
-// Buttons
- btnapi up(31);
- btnapi down(30);
+#include "os/os.h"
+ARDUGAMEOS OS;
 //змінні
 
 // files
 #include "embeded_libs/music/music.h"
 #include "GUI.h"
 #include "grafick.h"
-#include "apps/prog_init.h"
-#include "os/os.h"

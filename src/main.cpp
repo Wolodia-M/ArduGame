@@ -10,9 +10,10 @@ void setup()
   start();
   tn.noTone();
   sapi.moveTrack(0, 32, musP);
+  OS.init();
 }
 
 void loop()
 {
-  
+  OS.tick();
 }
