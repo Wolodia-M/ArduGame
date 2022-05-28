@@ -30,12 +30,13 @@ toneAPI tn((uint8_t)PYEZO, (uint8_t)0); // pyezospeaker
 #include "embeded_libs/soundAPI.h"  //api for sounds
 soundAPI sapi;
 // Buttons
-// btnapi up(13);
-// btnapi down(12);
+ btnapi up(31);
+ btnapi down(30);
 //змінні
 
 // files
 #include "embeded_libs/music/music.h"
 #include "GUI.h"
 #include "grafick.h"
+#include "apps/prog_init.h"
 #include "os/os.h"
