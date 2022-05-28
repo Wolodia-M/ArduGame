@@ -21,8 +21,9 @@
 */
 #define PYEZO 12 // pin for pyezospeaker
 // DEBUG / NODEBUG
-// MUS_POINTER_DEBUG
+// MUS_POINTER_DEBUG, MUS_DEBUG
 #define DEBUG
+#define MUS_DEBUG
 // Objects
 TFT_eSPI tft = TFT_eSPI();              // display
 toneAPI tn((uint8_t)PYEZO, (uint8_t)0); // pyezospeaker
@@ -34,5 +35,7 @@ soundAPI sapi;
 //змінні
 
 // files
+#include "embeded_libs/music/music.h"
 #include "GUI.h"
 #include "grafick.h"
+#include "os/os.h"

@@ -1,7 +1,6 @@
 #pragma once
 #include <Arduino.h>
 #include "timersapi.hpp"
-#include "music/music.h"
 
 /**
  * @brief Sound driver
@@ -25,14 +24,14 @@ public:
      *
      * @param _start starting pointer
      * @param _end end pointer
-     * @param _file file number
+     * @param _pointer pointer on music array
      */
-    void moveTrack(int _start, int _end, int _file)
+    void moveTrack(int _start, int _end, uint8_t* _pointer)
     {
         start = _start;
         pointer = _start;
         stop = _end;
-        file = _file;
+        array = _pointer;
     }
     /**
      * @brief start playing music
@@ -62,13 +61,13 @@ public:
             tn.tick();
             uint8_t f;
             uint8_t s;
-            switch (file)
-            {
-            case 0:
-                f = mus[pointer] >> 4;
-                s = mus[pointer] & 0x0F;
-                break;
-            }
+            f = *(array + pointer) >> 4;
+            s = *(array + pointer) & 0x0F;
+            #ifdef MUS_DEBUG
+            Serial.print("nmb");
+            Serial.print(f, HEX);
+            Serial.println(s, HEX);
+            #endif
             // NOTE_C, NOTE_Cs, NOTE_D, NOTE_Eb, NOTE_E, NOTE_F, NOTE_Fs, NOTE_G, NOTE_Gs, NOTE_A, NOTE_Bb, NOTE_B, NOTE_MAX
             switch (f)
             {
@@ -127,5 +126,5 @@ private:
     int stop = 0;
     uint8_t enable = 0;
     int pointer = 0;
-    int file;
+    uint8_t* array;
 };
